@@ -2,7 +2,6 @@ package com.example.playground.model
 
 import android.databinding.BaseObservable
 import android.databinding.Bindable
-import com.example.playground.BR
 
 /**
  * Class which provides a model for post
@@ -16,7 +15,7 @@ data class Post(
     val userId: Int?,
     val id: Int?,
     val title: String?,
-    val body: String?
+    val body: Boolean?
 )
 /**
 for two way databinding as a pojo class

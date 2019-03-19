@@ -1,22 +1,30 @@
 package com.example.playground.ui
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import com.example.playground.R
 import com.example.playground.databinding.ActivityListBinding
+import com.example.playground.injection.ViewModelFactory
 import com.example.playground.model.Post
+import com.example.playground.repository.ProjectRepositoryLocal
+import dagger.android.support.DaggerAppCompatActivity
+import javax.inject.Inject
 
-class PostListActivity: AppCompatActivity() {
+class PostListActivity: DaggerAppCompatActivity(), PostListAdapter.OnItemClickListener {
 
     /**
      * Databinding can be intialized by wrapping xml into layout tag.
      * lateinit modifier allows us to have non-null variables waiting for initialization
      */
     lateinit var binding: ActivityListBinding
-    var postListViewModel = PostListViewModel()
+    private val repositoryRecyclerViewAdapter = PostListAdapter(arrayListOf(), this)
+    @Inject lateinit var mainViewModelFactory: ViewModelProvider.Factory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +34,20 @@ class PostListActivity: AppCompatActivity() {
         //val repository = Post(17, 12, "Nothing","Hello")
 
         //binding.repository = repository
-        binding.viewModel = ViewModelProviders.of(this).get(PostListViewModel::class.java)
+
+        val viewModel = ViewModelProviders.of(this, mainViewModelFactory).get(PostListViewModel::class.java)
+
+        binding.viewModel = viewModel
+
         binding.executePendingBindings()
+
+        binding.repositoryRv.layoutManager = LinearLayoutManager(this)
+        binding.repositoryRv.adapter = repositoryRecyclerViewAdapter
+        viewModel.repositories.observe(this,
+            Observer<ArrayList<Post>> { it?.let{ repositoryRecyclerViewAdapter.setData(it)} })
+
+
+
 
         /**
          * This will change repository body text after 2sec and 4sec
@@ -45,5 +65,9 @@ class PostListActivity: AppCompatActivity() {
 
         }
          */
+    }
+
+    override fun onItemClick(position: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
