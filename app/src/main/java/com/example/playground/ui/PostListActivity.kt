@@ -43,8 +43,11 @@ class PostListActivity: DaggerAppCompatActivity(), PostListAdapter.OnItemClickLi
 
         binding.repositoryRv.layoutManager = LinearLayoutManager(this)
         binding.repositoryRv.adapter = repositoryRecyclerViewAdapter
-        viewModel.repositories.observe(this,
-            Observer<ArrayList<Post>> { it?.let{ repositoryRecyclerViewAdapter.setData(it)} })
+        viewModel.redundant.observe(this,
+            Observer<ArrayList<Post>> {
+                viewModel.isLoading.set(false)
+                it?.let{ repositoryRecyclerViewAdapter.setData(it)}
+            })
 
 
 
@@ -66,6 +69,7 @@ class PostListActivity: DaggerAppCompatActivity(), PostListAdapter.OnItemClickLi
         }
          */
     }
+
 
     override fun onItemClick(position: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
