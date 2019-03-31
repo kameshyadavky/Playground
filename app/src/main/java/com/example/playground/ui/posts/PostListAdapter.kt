@@ -1,16 +1,15 @@
-package com.example.playground.ui
+package com.example.playground.ui.posts
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.playground.databinding.ItemListBinding
 import com.example.playground.model.Post
-import android.R.attr.data
-
 
 
 class PostListAdapter(private var items: ArrayList<Post>,
-                                    private var listener: OnItemClickListener)
+                                    private var listener: OnItemClickListener
+)
     : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

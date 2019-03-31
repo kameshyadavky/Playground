@@ -1,4 +1,4 @@
-package com.example.playground.injection
+package com.example.playground.util.diUtil
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider

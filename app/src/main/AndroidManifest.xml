@@ -10,7 +10,7 @@
                  android:theme="@style/AppTheme"
                  android:name=".ModernApplication">
         <activity
-                android:name=".ui.PostListActivity">
+                android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

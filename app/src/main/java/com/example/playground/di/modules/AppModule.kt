@@ -1,4 +1,4 @@
-package com.example.playground.injection.modules
+package com.example.playground.di.modules
 
 import android.content.Context
 import com.example.playground.ModernApplication
@@ -16,4 +16,5 @@ class AppModule{
     fun providesContext(application: ModernApplication): Context {
         return application.applicationContext
     }
+
 }

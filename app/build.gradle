@@ -6,6 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdkVersion 28
 
@@ -61,8 +62,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -75,23 +77,27 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     // LiveData & ViewModel
-    implementation"android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
     //RxJava
     implementation "io.reactivex.rxjava2:rxjava:2.2.0"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
 
-    implementation "com.android.support:design:$android_support_version"
+
+    //Navigation UI
+    implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
 
     /* Dagger2 - We are going to use dagger.android which includes
      * support for Activity and fragment injection so we need to include
      * the following dependencies */
-    implementation "com.google.dagger:dagger:2.17"
+    //implementation "com.google.dagger:dagger:2.17"
     implementation "com.google.dagger:dagger-android:2.17"
     implementation "com.google.dagger:dagger-android-support:2.17"
     kapt "com.google.dagger:dagger-compiler:2.17"
     kapt "com.google.dagger:dagger-android-processor:2.17"
     // RecyclerView
     implementation "com.android.support:recyclerview-v7:$android_support_version"
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
 
 }

@@ -1,9 +1,9 @@
-package com.example.playground.injection.component
+package com.example.playground.di.component
 
 import com.example.playground.ModernApplication
-import com.example.playground.injection.modules.AppModule
-import com.example.playground.injection.modules.MainActivityModule
-import com.example.playground.injection.modules.ViewModelBuilder
+import com.example.playground.di.modules.AppModule
+import com.example.playground.di.modules.ActivityBindingModule
+import com.example.playground.util.diUtil.ViewModelModule
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
@@ -16,8 +16,8 @@ import javax.inject.Singleton
 @Component(
     modules = [AndroidSupportInjectionModule::class,
         AppModule::class,
-        ViewModelBuilder::class,
-        MainActivityModule::class])
+        ViewModelModule::class,
+        ActivityBindingModule::class])
 interface AppComponent : AndroidInjector<ModernApplication> {
 
     @Component.Builder

@@ -1,22 +1,16 @@
-package com.example.playground.ui
+package com.example.playground.ui.posts
 
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
+import android.arch.lifecycle.*
 import android.databinding.ObservableField
-import com.example.playground.base.BaseViewModel
 import com.example.playground.model.Post
 import com.example.playground.repository.OnDataReadyCallback
 import com.example.playground.repository.ProjectRepositoryLocal
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 
-class PostListViewModel @Inject constructor(private var projectRepositoryLocal: ProjectRepositoryLocal): BaseViewModel(){
+class PostListViewModel @Inject constructor(private var projectRepositoryLocal: ProjectRepositoryLocal): ViewModel(){
 
     var text = ObservableField<String>("Old data")
     var isLoading = ObservableField<Boolean>(false)

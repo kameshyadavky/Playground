@@ -1,12 +1,11 @@
-package com.example.playground.injection.modules
+package com.example.playground.util.diUtil
 
 import android.arch.lifecycle.ViewModelProvider
-import com.example.playground.injection.ViewModelFactory
 import dagger.Binds
 import dagger.Module
 
 @Module
-internal abstract class ViewModelBuilder {
+internal abstract class ViewModelModule {
 
     @Binds
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory):
