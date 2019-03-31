@@ -1,8 +1,8 @@
 package com.example.playground.repository
 
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import android.os.Handler
 import com.example.playground.model.Post
 import io.reactivex.Observable

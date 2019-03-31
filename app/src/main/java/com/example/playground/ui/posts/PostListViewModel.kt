@@ -1,12 +1,11 @@
 package com.example.playground.ui.posts
 
 
-import android.arch.lifecycle.*
-import android.databinding.ObservableField
+import androidx.lifecycle.*
+import androidx.databinding.ObservableField
 import com.example.playground.model.Post
 import com.example.playground.repository.OnDataReadyCallback
 import com.example.playground.repository.ProjectRepositoryLocal
-import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 
@@ -15,7 +14,7 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
     var text = ObservableField<String>("Old data")
     var isLoading = ObservableField<Boolean>(false)
 
-    private lateinit var subscription: Disposable
+    //private lateinit var subscription: Disposable
 
     var repositories = MutableLiveData<ArrayList<Post>>()
     //var redundant : LiveData<ArrayList<Post>> = MutableLiveData<ArrayList<Post>>()
@@ -95,7 +94,7 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
 
     override fun onCleared() {
         super.onCleared()
-        subscription.dispose()
+        //subscription.dispose()
     }
 }
 

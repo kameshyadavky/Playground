@@ -1,6 +1,6 @@
 package com.example.playground
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.example.playground.util.diUtil.ViewModelKey
 import dagger.Binds
 import dagger.Module
