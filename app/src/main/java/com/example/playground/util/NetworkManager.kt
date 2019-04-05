@@ -2,12 +2,13 @@ package com.example.playground.util
 
 import android.content.Context
 import android.net.ConnectivityManager
+import javax.inject.Inject
 
 
-class NetManager(private var applicationContext: Context) {
+class NetworkManager @Inject constructor(private var applicationContext: Context) {
     private var status: Boolean? = false
 
-    val isConnectedToInternet: Boolean?
+    val isConnectedToInternet: Boolean
         get() {
             val conManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val ni = conManager.activeNetworkInfo

@@ -13,5 +13,5 @@ interface PostApi {
      * Get the list of the pots from the API
      */
     @GET("/posts")
-    fun getPosts(): Call<List<Post>>
+    fun getPosts(): Observable<ArrayList<Post>>
 }

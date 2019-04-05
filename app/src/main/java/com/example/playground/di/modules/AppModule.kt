@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.playground.ModernApplication
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 
 /**
  * Module for providing Application context
@@ -12,6 +13,7 @@ import dagger.Provides
 @Module
 class AppModule{
 
+    @Named("AppContext")
     @Provides
     fun providesContext(application: ModernApplication): Context {
         return application.applicationContext

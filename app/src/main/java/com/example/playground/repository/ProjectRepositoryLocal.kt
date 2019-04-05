@@ -1,18 +1,28 @@
 package com.example.playground.repository
 
 
-import androidx.lifecycle.LiveData
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import android.os.Handler
+import android.widget.Toast
 import com.example.playground.model.Post
+import com.example.playground.network.PostApi
+import com.example.playground.util.NetworkManager
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import javax.inject.Named
 
-class ProjectRepositoryLocal @Inject constructor() {
+class ProjectRepositoryLocal @Inject constructor(private var retrofitApiSerivice : PostApi,
+                                                 @Named("AppContext") var context : Context
+) {
 
 
     var data =  MutableLiveData<ArrayList<Post>>()
+    private lateinit var subscription : Disposable
 
     // Function to return data to viewmodel
     fun refreshData(onDataReadyCallback: OnDataReadyCallback) {
@@ -39,6 +49,7 @@ class ProjectRepositoryLocal @Inject constructor() {
     }
 
     fun getLiveDataRepository(){
+
         var arrayList = ArrayList<Post>()
         arrayList.add(Post(1478, 1, "First" , false))
         arrayList.add(Post(1478, 2, "First" , false))
@@ -46,6 +57,16 @@ class ProjectRepositoryLocal @Inject constructor() {
         data.value = arrayList
     }
 
+    fun getRetrofitData(){
+        subscription = retrofitApiSerivice.getPosts()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result -> data.value = result },
+                { error -> Toast.makeText(context, error.toString(),Toast.LENGTH_SHORT).show()}
+            )
+
+    }
     fun saveRepositories(arrayList: ArrayList<Post>){
         //todo save repositories in DB
     }

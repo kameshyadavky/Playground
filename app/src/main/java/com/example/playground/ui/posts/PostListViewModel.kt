@@ -40,7 +40,8 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
 
 
         isLoading.set(true)
-        projectRepositoryLocal.getLiveDataRepository()
+        projectRepositoryLocal.getRetrofitData()
+
         /**
         subscription = projectRepositoryLocal.getLiveRepositories()
             .subscribeOn(Schedulers.io())
@@ -78,7 +79,8 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
 
     }
 
-    fun blogpostBoilerplateExample(): LiveData<ArrayList<Post>> {
+ /*  Mediator Live data to listen from two data sources
+   fun blogpostBoilerplateExample(): LiveData<ArrayList<Post>> {
 
 
         val result = MediatorLiveData<ArrayList<Post>>()
@@ -91,7 +93,7 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
         }
         return result
     }
-
+*/
     override fun onCleared() {
         super.onCleared()
         //subscription.dispose()
