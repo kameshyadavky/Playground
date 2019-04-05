@@ -3,6 +3,7 @@ package com.example.playground.di.modules
 import android.content.Context
 import androidx.annotation.NonNull
 import com.example.playground.network.PostApi
+import com.example.playground.util.BASE_URL
 import com.example.playground.util.NetworkManager
 import dagger.Module
 import dagger.Provides
@@ -22,10 +23,10 @@ import javax.inject.Singleton
  * Define here all objects that are shared throughout the app, like [retrofitInstanceProvider].
  * If some of those objects are singletons, they should be annotated with `@Singleton`.
  */
-@Module(includes = [AppModule::class])
-class NetworkModule (networkManager : NetworkManager){
+@Module(includes = [AppModule::class, NetworkManager::class])
+class NetworkModule{
 
-    private var isOnline: Boolean = networkManager.isConnectedToInternet
+    private var isOnline: Boolean = false
     private lateinit var context: Context
     private val Cache_Control = "cache-control"
 
@@ -35,15 +36,18 @@ class NetworkModule (networkManager : NetworkManager){
 
     @Singleton
     @Provides
-    fun retrofitInstanceProvider(@Named("AppContext") context: Context): PostApi{
+    fun retrofitInstanceProvider(@Named("AppContext") context: Context,
+                                 @Named("isOnline") isOnline : Boolean): PostApi{
+        this.isOnline = isOnline
         this.context = context
         return retrofitProvider().create(PostApi::class.java)
     }
 
     @Singleton
-    private fun retrofitProvider(): Retrofit {
+    @Provides
+    fun retrofitProvider(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://raw.githubusercontent.com/akshay253101/ContactKotlin/master/")
+            .baseUrl(BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .client(okHttpClient())

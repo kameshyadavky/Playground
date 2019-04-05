@@ -7,7 +7,7 @@ import com.example.playground.databinding.ItemListBinding
 import com.example.playground.model.Post
 
 
-class PostListAdapter(private var items: ArrayList<Post>,
+class PostListAdapter(private var items: List<Post>,
                                     private var listener: OnItemClickListener
 )
     : androidx.recyclerview.widget.RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
@@ -27,7 +27,7 @@ class PostListAdapter(private var items: ArrayList<Post>,
         fun onItemClick(position: Int)
     }
 
-    fun setData(newData: ArrayList<Post>) {
+    fun setData(newData: List<Post>) {
         items = newData
         notifyDataSetChanged()
     }

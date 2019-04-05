@@ -7,7 +7,6 @@ import android.os.Handler
 import android.widget.Toast
 import com.example.playground.model.Post
 import com.example.playground.network.PostApi
-import com.example.playground.util.NetworkManager
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -21,7 +20,7 @@ class ProjectRepositoryLocal @Inject constructor(private var retrofitApiSerivice
 ) {
 
 
-    var data =  MutableLiveData<ArrayList<Post>>()
+    var data =  MutableLiveData<List<Post>>()
     private lateinit var subscription : Disposable
 
     // Function to return data to viewmodel
@@ -31,18 +30,18 @@ class ProjectRepositoryLocal @Inject constructor(private var retrofitApiSerivice
 
     fun getRepositories(onRepositoryReadyCallback: OnLocalRepositoryReadyCallback) {
         var arrayList = ArrayList<Post>()
-        arrayList.add(Post(1478, 1, "First" , false))
-        arrayList.add(Post(1478, 1, "First" , false))
-        arrayList.add(Post(1478, 1, "First" , false))
+        arrayList.add(Post(1478, 1, "First" , "false"))
+        arrayList.add(Post(1478, 1, "First" , "false"))
+        arrayList.add(Post(1478, 1, "First" , "false"))
 
         Handler().postDelayed({ onRepositoryReadyCallback.onDataReady(arrayList) },2000)
     }
 
     fun getLiveRepositories(): Observable<ArrayList<Post>> {
         var arrayList = ArrayList<Post>()
-        arrayList.add(Post(1478, 11, "First" , false))
-        arrayList.add(Post(1478, 12, "First" , false))
-        arrayList.add(Post(1478, 13, "First" , false))
+        arrayList.add(Post(1478, 11, "First" , "false"))
+        arrayList.add(Post(1478, 12, "First" , "false"))
+        arrayList.add(Post(1478, 13, "First" , "false"))
 
         return Observable.just(arrayList).delay ( 2, TimeUnit.SECONDS)
 
@@ -51,9 +50,9 @@ class ProjectRepositoryLocal @Inject constructor(private var retrofitApiSerivice
     fun getLiveDataRepository(){
 
         var arrayList = ArrayList<Post>()
-        arrayList.add(Post(1478, 1, "First" , false))
-        arrayList.add(Post(1478, 2, "First" , false))
-        arrayList.add(Post(1478, 3, "First" , false))
+        arrayList.add(Post(1478, 1, "First" , "false"))
+        arrayList.add(Post(1478, 2, "First" , "false"))
+        arrayList.add(Post(1478, 3, "First" , "false"))
         data.value = arrayList
     }
 

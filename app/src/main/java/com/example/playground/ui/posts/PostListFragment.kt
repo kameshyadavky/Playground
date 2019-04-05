@@ -56,7 +56,7 @@ class PostListFragment : DaggerFragment(),PostListAdapter.OnItemClickListener  {
         binding.repositoryRv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.context)
         binding.repositoryRv.adapter = repositoryRecyclerViewAdapter
         viewModel.redundant.observe(this,
-            Observer<ArrayList<Post>> {
+            Observer<List<Post>> {
                 viewModel.isLoading.set(false)
                 it?.let{ repositoryRecyclerViewAdapter.setData(it)}
             })

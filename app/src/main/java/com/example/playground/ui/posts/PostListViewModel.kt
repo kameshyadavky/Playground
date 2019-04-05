@@ -14,7 +14,6 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
     var text = ObservableField<String>("Old data")
     var isLoading = ObservableField<Boolean>(false)
 
-    //private lateinit var subscription: Disposable
 
     var repositories = MutableLiveData<ArrayList<Post>>()
     //var redundant : LiveData<ArrayList<Post>> = MutableLiveData<ArrayList<Post>>()
@@ -56,7 +55,7 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
 
     }
 
-    fun passLivedatatoUI(arrayList: ArrayList<Post>):ArrayList<Post>{
+    fun passLivedatatoUI(arrayList: List<Post>):List<Post>{
         isLoading.set(false)
         return arrayList
     }

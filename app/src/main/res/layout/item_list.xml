@@ -46,7 +46,6 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/has_issues"
                     android:textStyle="bold"
-                    android:visibility="@{repository.body ? View.VISIBLE : View.GONE}"
                     app:layout_constraintBottom_toBottomOf="@+id/repository_name"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"

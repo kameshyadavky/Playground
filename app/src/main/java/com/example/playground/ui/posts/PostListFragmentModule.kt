@@ -1,6 +1,7 @@
 package com.example.playground.ui.posts
 
 import androidx.lifecycle.ViewModel
+import com.example.playground.di.modules.NetworkModule
 import com.example.playground.util.diUtil.ViewModelKey
 import com.example.playground.util.diUtil.scope.FragmentScoped
 import dagger.Binds

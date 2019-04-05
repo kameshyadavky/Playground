@@ -3,6 +3,7 @@ package com.example.playground.di.component
 import com.example.playground.ModernApplication
 import com.example.playground.di.modules.AppModule
 import com.example.playground.di.modules.ActivityBindingModule
+import com.example.playground.di.modules.NetworkModule
 import com.example.playground.util.diUtil.ViewModelModule
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -17,6 +18,7 @@ import javax.inject.Singleton
     modules = [AndroidSupportInjectionModule::class,
         AppModule::class,
         ViewModelModule::class,
+        NetworkModule::class,
         ActivityBindingModule::class])
 interface AppComponent : AndroidInjector<ModernApplication> {
 

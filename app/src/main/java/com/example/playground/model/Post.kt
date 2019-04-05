@@ -15,7 +15,7 @@ data class Post(
     val userId: Int?,
     val id: Int?,
     val title: String?,
-    val body: Boolean?
+    val body: String?
 )
 /**
 for two way databinding as a pojo class

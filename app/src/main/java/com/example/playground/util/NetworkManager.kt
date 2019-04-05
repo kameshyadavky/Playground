@@ -2,16 +2,34 @@ package com.example.playground.util
 
 import android.content.Context
 import android.net.ConnectivityManager
-import javax.inject.Inject
+import dagger.Module
+import dagger.Provides
 
 
-class NetworkManager @Inject constructor(private var applicationContext: Context) {
-    private var status: Boolean? = false
+import android.net.NetworkInfo
+import android.util.Log
+import com.example.playground.di.modules.AppModule
+import java.util.Objects
+import javax.inject.Named
 
-    val isConnectedToInternet: Boolean
-        get() {
-            val conManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val ni = conManager.activeNetworkInfo
-            return ni != null && ni.isConnected
+@Module(includes = [AppModule::class])
+class NetworkManager {
+
+    @Named("isOnline")
+    @Provides
+    fun isOnline(@Named("AppContext")context: Context): Boolean {
+        val connectivityManager: ConnectivityManager
+        var networkInfo: NetworkInfo? = null
+
+        try {
+            connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            networkInfo = Objects.requireNonNull(connectivityManager).activeNetworkInfo
+        } catch (e: Exception) {
+            Log.e("connectivity", e.toString())
         }
+
+        return networkInfo != null && networkInfo.isConnected
+
+    }
+
 }
