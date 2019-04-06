@@ -1,8 +1,7 @@
-package com.example.playground.network
+package com.example.playground.data.network
 
-import com.example.playground.model.Post
+import com.example.playground.data.model.Post
 import io.reactivex.Observable
-import retrofit2.Call
 import retrofit2.http.GET
 
 /**

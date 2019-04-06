@@ -4,13 +4,20 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.playground.databinding.ItemListBinding
-import com.example.playground.model.Post
+import com.example.playground.data.model.Post
 
-
+/**
+ * [PostListAdapter]
+ * @use {var adapter = PostListAdapter(items){
+ *                              funtionToPerform
+ *                              }}
+ * @param items List of Posts to inflate RecyclerView with
+ * @param listener function to call when item is clicked
+ */
 class PostListAdapter(private var items: List<Post>,
-                                    private var listener: OnItemClickListener
+                      private val listener: (Post) -> Unit
 )
-    : androidx.recyclerview.widget.RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
+    : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -23,10 +30,6 @@ class PostListAdapter(private var items: List<Post>,
 
     override fun getItemCount(): Int = items.size
 
-    interface OnItemClickListener {
-        fun onItemClick(position: Int)
-    }
-
     fun setData(newData: List<Post>) {
         items = newData
         notifyDataSetChanged()
@@ -35,13 +38,9 @@ class PostListAdapter(private var items: List<Post>,
     class ViewHolder(private var binding: ItemListBinding) :
         androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(repo: Post, listener: OnItemClickListener?) {
-            binding.repository = repo
-            if (listener != null) {
-                binding.root.setOnClickListener{ listener.onItemClick(layoutPosition)}
-            }
-
-            binding.executePendingBindings()
+        fun bind(repo : Post, listener: (Post) -> Unit) = with(binding){
+            repository = repo
+            root.setOnClickListener { listener(repo) }
         }
     }
 

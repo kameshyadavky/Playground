@@ -9,7 +9,7 @@
 
         <variable
                 name="repository"
-                type="com.example.playground.model.Post" />
+                type="com.example.playground.data.model.Post" />
     </data>
 
     <androidx.cardview.widget.CardView

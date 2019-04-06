@@ -3,28 +3,35 @@ package com.example.playground.ui.posts
 
 import androidx.lifecycle.*
 import androidx.databinding.ObservableField
-import com.example.playground.model.Post
-import com.example.playground.repository.OnDataReadyCallback
-import com.example.playground.repository.ProjectRepositoryLocal
+import com.example.playground.domain.useCase.LoadPostUseCase
+import com.example.playground.data.model.Post
+import com.example.playground.domain.useCase.LoadLocalUseCase
+import com.example.playground.util.map
 import javax.inject.Inject
 
 
-class PostListViewModel @Inject constructor(private var projectRepositoryLocal: ProjectRepositoryLocal): ViewModel(){
+class PostListViewModel @Inject constructor(var loadPostUseCase : LoadPostUseCase): ViewModel(){
 
-    var text = ObservableField<String>("Old data")
+    //var text = ObservableField<String>("Old data")
     var isLoading = ObservableField<Boolean>(false)
 
 
-    var repositories = MutableLiveData<ArrayList<Post>>()
-    //var redundant : LiveData<ArrayList<Post>> = MutableLiveData<ArrayList<Post>>()
-
-
-    val redundant = Transformations.map(projectRepositoryLocal.data){
-        data->passLivedatatoUI(data)
+    var repositories = loadPostUseCase.observe().map {
+        passLiveDataToUI(it)
     }
 
+    //var redundant = MutableLiveData<List<Post>>()
+/*
+    val redundant = projectRepositoryLocal.data.map {
+        data -> passLiveDataToUI(data)
+    }*/
+
+    /*val redundant = Transformations.map(projectRepositoryLocal.data){
+        data->passLiveDataToUI(data)
+    }*/
 
 
+/*
     fun refresh(){
         isLoading.set(true)
         projectRepositoryLocal.refreshData(object : OnDataReadyCallback {
@@ -33,13 +40,13 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
                 text.set(data)
             }
         })
-    }
+    }*/
 
     fun loadRxRepositories() {
 
 
-        isLoading.set(true)
-        projectRepositoryLocal.getRetrofitData()
+        //isLoading.set(false)
+        loadPostUseCase.execute()
 
         /**
         subscription = projectRepositoryLocal.getLiveRepositories()
@@ -55,11 +62,11 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
 
     }
 
-    fun passLivedatatoUI(arrayList: List<Post>):List<Post>{
+    private fun passLiveDataToUI(arrayList: List<Post>):List<Post>{
         isLoading.set(false)
         return arrayList
     }
-    private fun onRetrievePostListStart(){
+    /*private fun onRetrievePostListStart(){
 
         isLoading.set(true)
     }
@@ -78,7 +85,7 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
 
     }
 
- /*  Mediator Live data to listen from two data sources
+ *//*  Mediator Live data to listen from two data sources
    fun blogpostBoilerplateExample(): LiveData<ArrayList<Post>> {
 
 
@@ -92,10 +99,10 @@ class PostListViewModel @Inject constructor(private var projectRepositoryLocal: 
         }
         return result
     }
-*/
+*//*
     override fun onCleared() {
         super.onCleared()
         //subscription.dispose()
-    }
+    }*/
 }
 

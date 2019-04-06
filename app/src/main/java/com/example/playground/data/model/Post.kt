@@ -1,7 +1,4 @@
-package com.example.playground.model
-
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
+package com.example.playground.data.model
 
 /**
  * Class which provides a model for post

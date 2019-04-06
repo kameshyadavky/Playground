@@ -1,4 +1,4 @@
-package com.example.playground.util
+package com.example.playground.util.diUtil
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -13,7 +13,7 @@ import java.util.Objects
 import javax.inject.Named
 
 @Module(includes = [AppModule::class])
-class NetworkManager {
+class ConnectionCheckModule {
 
     @Named("isOnline")
     @Provides

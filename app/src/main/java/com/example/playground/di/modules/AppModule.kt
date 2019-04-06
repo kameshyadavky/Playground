@@ -13,6 +13,8 @@ import javax.inject.Named
 @Module
 class AppModule{
 
+    // @Named : if the two provides method are returning same type we have to use this scope
+    // @use  { @Named("AppContext") context : Context }
     @Named("AppContext")
     @Provides
     fun providesContext(application: ModernApplication): Context {
