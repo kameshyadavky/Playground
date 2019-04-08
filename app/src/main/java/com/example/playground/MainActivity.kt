@@ -1,57 +1,39 @@
 package com.example.playground
 
 import android.os.Bundle
-import androidx.navigation.NavController
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.*
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*  //import for avoid using findViewById
 
+
 class MainActivity: DaggerAppCompatActivity() {
 
-    private lateinit var appBarConfiguration : AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+
+        //bottom_app_bar.replaceMenu(R.menu.menu_nav_drawer)
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
         val navController = host.navController
-
-        /**
-         * AppBarConfiguration to define hamburger icon behaviour with navigation
-         */
-        appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.postListFragment),
-            drawerLayout)
-
-        setupActionBar(navController, appBarConfiguration)
-        setupNavigationMenu(navController)
-
-    }
-
-
-    private fun setupNavigationMenu(navController: NavController) {
-        navigationView?.setupWithNavController(navController)
-
-        navigationView.setNavigationItemSelectedListener {
-            if(it != navigationView.checkedItem){
-                it.onNavDestinationSelected(navController)
-            }
-            it.isChecked = true
-            drawerLayout?.closeDrawers()
-            true
+        // for menu item listener
+        bottom_app_bar.setNavigationOnClickListener {
+            val bottomNavigationFragment = BottomNavigationFragment()
+            bottomNavigationFragment.show(supportFragmentManager, bottomNavigationFragment.tag)
         }
 
-    }
+        // for overflowing menu
+        bottom_app_bar.setOnMenuItemClickListener { item ->
+            when(item.itemId) {
+                R.id.postListFragment -> {
+                    navController.navigate(R.id.design_bottom_sheet)
+                    true
+                }
+                else -> false
+            }
+        }
 
-    private fun setupActionBar(navController: NavController,
-                               appBarConfiguration: AppBarConfiguration) {
-        setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
     }
 }
