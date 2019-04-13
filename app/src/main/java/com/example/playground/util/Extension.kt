@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
 import com.example.playground.ui.posts.PostListFragment
+import java.util.concurrent.Executor
 
 
 /**
@@ -73,4 +74,8 @@ inline fun <reified T : ViewModel> Fragment.viewModelWithLiveData(factory: ViewM
     val vm = ViewModelProviders.of(this, factory)[T::class.java]
     vm.body()
     return vm
+}
+
+fun Executor.perform(executor: Executor, someFunction:()->Unit){
+    executor.execute(someFunction)
 }

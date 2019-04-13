@@ -17,6 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context="com.example.playground.ui.posts.PostListFragment">
+        <TextView android:layout_width="match_parent" android:layout_height="match_parent"
+        android:text="hrlo"/>
 
         <ProgressBar
                 android:id="@+id/loading"
@@ -24,7 +26,7 @@
                 android:layout_height="48dp"
                 android:indeterminate="true"
                 android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toTopOf="@+id/refresh_button"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -35,28 +37,11 @@
                 android:layout_height="0dp"
                 android:indeterminate="true"
                 android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
-                app:layout_constraintBottom_toTopOf="@+id/refresh_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_list"/>
-
-        <Button
-                android:id="@+id/refresh_button"
-                android:layout_width="160dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:onClick="@{() -> viewModel.loadRxRepositories()}"
-                android:clickable="@{viewModel.isLoading ? false : true}"
-                android:text="Refresh"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.87"/>
+                tools:listitem="@layout/item_list"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

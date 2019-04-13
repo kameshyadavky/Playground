@@ -1,10 +1,12 @@
 package com.example.playground.domain.useCase
 
-
+/**
+ * This use case was implemented in IOSched by google.
+ * TODO : implement my own version
+ */
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.playground.util.DefaultScheduler
-import com.example.playground.domain.result.Result
 /**
  * Executes business logic synchronously or asynchronously using a [Scheduler].
  *

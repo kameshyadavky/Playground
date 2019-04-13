@@ -1,5 +1,9 @@
 package com.example.playground.data.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 /**
  * Class which provides a model for post
  * @constructor Sets all properties of the post
@@ -8,11 +12,12 @@ package com.example.playground.data.model
  * @property title the title of the post
  * @property body the content of the post
  */
+@Entity
 data class Post(
-    val userId: Int?,
-    val id: Int?,
-    val title: String?,
-    val body: String?
+    @PrimaryKey val id: Int?,
+    @ColumnInfo(name = "userId")val userId: Int?,
+    @ColumnInfo(name = "title")val title: String?,
+    @ColumnInfo(name="body")val body: String?
 )
 /**
 for two way databinding as a pojo class

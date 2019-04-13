@@ -1,39 +1,68 @@
 package com.example.playground
 
 import android.os.Bundle
-import android.widget.Toast
+import android.view.Menu
+import android.view.View
+import android.view.WindowManager
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.playground.ui.BottomNavigationFragment
+import com.example.playground.ui.posts.PostListFragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*  //import for avoid using findViewById
 
 
-class MainActivity: DaggerAppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
+
+    private val bottomNavigationFragment by lazy {
+        BottomNavigationFragment()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        /**
+         * must be provided before adding view
+         * fullscreen can also be added in Theme but programmatically we can set flag whenever we want
+         */
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
 
-        //bottom_app_bar.replaceMenu(R.menu.menu_nav_drawer)
-        val host: NavHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment? ?: return
-        val navController = host.navController
+        setContentView(R.layout.activity_main)
+        val navController = findNavController(R.id.nav_host_fragment)
+        setSupportBottomBar(navController)
+    }
+
+    private fun setSupportBottomBar(navController: NavController) {
+
+        //overflow menu will be inflated
+        //currently setup in XML
+        //bottom_app_bar.replaceMenu(R.menu.overflow_menu)
+
+        // this is for overflow menu
+        bottom_app_bar.setOnMenuItemClickListener {
+            bottomNavigationFragment.show(supportFragmentManager, bottomNavigationFragment.tag)
+
+            /*
+           if (it.itemId != navController.currentDestination!!.id) {
+                it.onNavDestinationSelected(navController)
+            }
+            it.isChecked = true
+            */
+
+            true
+        }
+
         // for menu item listener
         bottom_app_bar.setNavigationOnClickListener {
-            val bottomNavigationFragment = BottomNavigationFragment()
             bottomNavigationFragment.show(supportFragmentManager, bottomNavigationFragment.tag)
         }
 
-        // for overflowing menu
-        bottom_app_bar.setOnMenuItemClickListener { item ->
-            when(item.itemId) {
-                R.id.postListFragment -> {
-                    navController.navigate(R.id.design_bottom_sheet)
-                    true
-                }
-                else -> false
-            }
-        }
+    }
+
+    fun fabButtonAction(view: View){
 
     }
 }

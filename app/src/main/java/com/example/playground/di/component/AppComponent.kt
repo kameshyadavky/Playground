@@ -4,6 +4,7 @@ import com.example.playground.ModernApplication
 import com.example.playground.di.modules.AppModule
 import com.example.playground.di.modules.ActivityBindingModule
 import com.example.playground.di.modules.NetworkModule
+import com.example.playground.di.modules.RoomDatabaseModule
 import com.example.playground.util.diUtil.ViewModelModule
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -21,6 +22,7 @@ import javax.inject.Singleton
         AppModule::class,
         NetworkModule::class,
         ViewModelModule::class,
+        RoomDatabaseModule::class,
         ActivityBindingModule::class])
 interface AppComponent : AndroidInjector<ModernApplication> {
 

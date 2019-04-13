@@ -4,7 +4,7 @@ import com.example.playground.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
-class ModernApplication : DaggerApplication(){
+class ModernApplication : DaggerApplication() {
 
 
     /**
