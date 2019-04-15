@@ -4,6 +4,7 @@
     <!-- Theme added to Manifest file -->
     <style name="AppTheme" parent="BaseAppTheme">
         <item name="actionOverflowButtonStyle">@style/MyOverflowButtonStyle</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetTheme</item>
     </style>
 
 
@@ -18,5 +19,13 @@
 
     <style name="MyOverflowButtonStyle" parent="android:Widget.Material.ActionButton.Overflow">
 
+    </style>
+    
+    <style name="BottomSheetTheme" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppDialogStyle</item>
+    </style>
+    
+    <style name="AppDialogStyle" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:background">@drawable/bottom_navigation_dialog_bg</item>
     </style>
 </resources>

@@ -1,9 +1,18 @@
 package com.example.playground.util
 
 
+import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.example.playground.ui.posts.PostListFragment
 import java.util.concurrent.Executor
 
@@ -69,6 +78,39 @@ fun <X, Y> LiveData<X>.map(body: (X) -> Y): LiveData<Y> {
     return Transformations.map(this, body)
 }
 
+fun ImageView.load(uri: Uri?){
+    Glide.with(context).load(uri)
+        .apply(
+            RequestOptions()
+                .circleCrop()
+        )
+        .listener(object : RequestListener<Drawable>{
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
+                return false
+                TODO("Apply some listener " +
+                        "when image is loaded") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
+                return false
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        })
+        .into(this)
+}
+
 
 inline fun <reified T : ViewModel> Fragment.viewModelWithLiveData(factory: ViewModelProvider.Factory, body: T.() -> Unit): T {
     val vm = ViewModelProviders.of(this, factory)[T::class.java]
@@ -76,6 +118,3 @@ inline fun <reified T : ViewModel> Fragment.viewModelWithLiveData(factory: ViewM
     return vm
 }
 
-fun Executor.perform(executor: Executor, someFunction:()->Unit){
-    executor.execute(someFunction)
-}

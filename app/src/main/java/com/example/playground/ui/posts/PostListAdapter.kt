@@ -25,13 +25,12 @@ class PostListAdapter
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int){
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = getItem(position)
         with(holder){
             post?.let { bind(it) }
         }
     }
-
 
     companion object {
         /**

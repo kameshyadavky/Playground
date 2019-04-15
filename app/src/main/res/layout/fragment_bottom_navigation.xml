@@ -5,6 +5,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+    <View android:id="@+id/divider"
+          android:layout_width="36dp"
+          android:layout_height="4dp"
+          android:background="@android:color/white"
+          android:layout_marginTop="8dp"
+          android:layout_marginBottom="8dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintBottom_toTopOf="@id/navigation_view"/>
 
     <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
@@ -18,6 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:itemTextColor="@android:color/black"
+            app:headerLayout="@layout/nav_header"
             app:menu="@menu/menu_nav_drawer"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

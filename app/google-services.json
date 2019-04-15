@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "13352975511",
+    "firebase_url": "https://playground-shrimaan.firebaseio.com",
+    "project_id": "playground-shrimaan",
+    "storage_bucket": "playground-shrimaan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13352975511:android:fa75f0f4918323b4",
+        "android_client_info": {
+          "package_name": "com.example.playground"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13352975511-of4f74ibvkegimbpqdmuvupkg7tkitc2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.playground",
+            "certificate_hash": "583bf924245e4215195bdf16b623fb30d45a8722"
+          }
+        },
+        {
+          "client_id": "13352975511-j2b0fj7b720co9mbmslu3kvkkr31v40n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx9miNsUPtyQ9vxVvP3WetxL5wgHvZemQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13352975511-j2b0fj7b720co9mbmslu3kvkkr31v40n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

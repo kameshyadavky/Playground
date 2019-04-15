@@ -4,10 +4,8 @@ package com.example.playground.domain.useCase.loadposts
 import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.example.playground.data.PostRepo
 import com.example.playground.data.PostRepository
 import com.example.playground.data.model.Post
-import com.example.playground.domain.useCase.MediatorDataUseCase
 import javax.inject.Inject
 
 open class LoadPostUseCase @Inject constructor(
@@ -15,6 +13,9 @@ open class LoadPostUseCase @Inject constructor(
 ){
 
 
+    /**
+     * This function makes request call and store result in database
+     */
     fun refreshData() {
         repository.getPosts()
     }
@@ -28,6 +29,9 @@ open class LoadPostUseCase @Inject constructor(
         return data.build()
     }
 
+    /**
+     * dispose of subscriber in repository
+     */
     fun dispose(){
         repository.dispose()
     }

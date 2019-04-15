@@ -1,6 +1,7 @@
 package com.example.playground.data
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -9,6 +10,7 @@ import androidx.paging.PagedList
 import com.example.playground.data.model.Post
 import com.example.playground.data.network.PostApi
 import com.example.playground.data.network.RoomApi
+import com.google.firebase.firestore.FirebaseFirestore
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -23,14 +25,31 @@ open class PostRepository @Inject constructor(
     private var retrofitApi: PostApi,
     @Named("AppContext") var context: Context,
     private var roomApi: RoomApi
-) : PostRepo {
+) {
+    private var subscription:Disposable? = null
+    private var posts = MutableLiveData<List<Post>>()
 
-    private val ioExecutor: Executor? = null
+    private val fireStore = FirebaseFirestore.getInstance()
 
-    var data = MutableLiveData<List<Post>>()
-    private lateinit var subscription: Disposable
+    fun getFirestore(): LiveData<List<Post>>{
 
-    override fun getPosts(){
+        fireStore.collection("users")
+            .get()
+            .addOnSuccessListener{ result->
+
+                posts.value = result.toObjects(Post::class.java)
+                for (document in result) {
+                    Log.d("Hello", "${document.id} => ${document.data}")
+                }
+            }
+            .addOnFailureListener{
+                Log.d("failed",it.toString())
+            }
+
+        return posts
+
+    }
+    fun getPosts() {
         subscription = retrofitApi.getPosts()
             .concatMap {
                 roomApi.insertAll(*it.toTypedArray())
@@ -39,31 +58,20 @@ open class PostRepository @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result ->
-                    data.value = result
+                {
+                    //do something
                 },
                 { error -> Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show() }
             )
     }
 
+    fun getDatabasePosts(): DataSource.Factory<Int, Post> = roomApi.getAllPosts()
 
-    override fun getDatabasePosts(): DataSource.Factory<Int, Post> = roomApi.getAllPosts()
-
-
-    private fun saveRepositories(arrayList: List<Post>) {
-        ioExecutor?.execute {
-            roomApi.insertAll(*arrayList.toTypedArray())
+    fun dispose() {
+        if(subscription!= null){
+            subscription?.dispose()
         }
+
     }
 
-    override fun dispose() {
-        subscription.dispose()
-    }
-
-}
-
-interface PostRepo {
-    fun getPosts()
-    fun dispose()
-    fun getDatabasePosts(): DataSource.Factory<Int, Post>
 }

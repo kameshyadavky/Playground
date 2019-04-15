@@ -1,19 +1,18 @@
 package com.example.playground
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.View
+import android.util.Log
 import android.view.WindowManager
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import com.example.playground.ui.BottomNavigationFragment
-import com.example.playground.ui.posts.PostListFragment
+import androidx.navigation.ui.onNavDestinationSelected
+import com.example.playground.ui.navigation.BottomNavigationFragment
+import com.google.firebase.auth.FirebaseAuth
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*  //import for avoid using findViewById
 
 
-class MainActivity : DaggerAppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity(){
 
     private val bottomNavigationFragment by lazy {
         BottomNavigationFragment()
@@ -30,10 +29,15 @@ class MainActivity : DaggerAppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        val user = FirebaseAuth.getInstance().currentUser
+        Log.e("user",user.toString())
+
         setContentView(R.layout.activity_main)
         val navController = findNavController(R.id.nav_host_fragment)
         setSupportBottomBar(navController)
+
     }
+
 
     private fun setSupportBottomBar(navController: NavController) {
 
@@ -43,15 +47,16 @@ class MainActivity : DaggerAppCompatActivity() {
 
         // this is for overflow menu
         bottom_app_bar.setOnMenuItemClickListener {
-            bottomNavigationFragment.show(supportFragmentManager, bottomNavigationFragment.tag)
 
-            /*
-           if (it.itemId != navController.currentDestination!!.id) {
-                it.onNavDestinationSelected(navController)
+            if(it.itemId == R.id.postListFragment) {
+                bottomNavigationFragment.show(supportFragmentManager, bottomNavigationFragment.tag)
             }
-            it.isChecked = true
-            */
-
+            else{
+                if (it.itemId != navController.currentDestination!!.id) {
+                    it.onNavDestinationSelected(navController)
+                }
+                it.isChecked = true
+            }
             true
         }
 
@@ -62,7 +67,4 @@ class MainActivity : DaggerAppCompatActivity() {
 
     }
 
-    fun fabButtonAction(view: View){
-
-    }
 }

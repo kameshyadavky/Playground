@@ -16,33 +16,6 @@ android {
 
     flavorDimensions "default"
 
-    productFlavors {
-
-        finalProduction {
-            dimension "default"
-            applicationId "com.example.playground"
-            resValue "string", "app_name", "Modern App"
-        }
-
-        demoProduction {
-            dimension "default"
-            applicationId "com.example.playground.demoproduction"
-            resValue "string", "app_name", "Modern App Demo P"
-        }
-
-        demoTesting {
-            dimension "default"
-            applicationId "com.example.playground.demotesting"
-            resValue "string", "app_name", "Modern App Demo T"
-        }
-
-
-        mock {
-            dimension "default"
-            applicationId "com.example.playground.mock"
-            resValue "string", "app_name", "Modern App Mock"
-        }
-    }
 
     defaultConfig {
         applicationId "com.example.playground"
@@ -53,6 +26,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+
+            debuggable true
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -83,7 +61,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
 
-
     //RxJava
     implementation "io.reactivex.rxjava2:rxjava:2.2.0"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
@@ -101,7 +78,6 @@ dependencies {
     /* Dagger2 - We are going to use dagger.android which includes
      * support for Activity and fragment injection so we need to include
      * the following dependencies */
-    //implementation "com.google.dagger:dagger:2.17"
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
@@ -109,4 +85,21 @@ dependencies {
 
     //Paging Library
     implementation 'android.arch.paging:runtime:1.0.1'
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+
+    //Firebase Database
+    implementation 'com.google.firebase:firebase-database:16.1.0'
+    implementation 'com.google.firebase:firebase-firestore:18.2.0'
+
+    //Firebase Authentication
+    implementation 'com.google.firebase:firebase-auth:16.2.1'
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    kapt 'com.github.bumptech.glide:compiler:4.9.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

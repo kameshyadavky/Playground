@@ -2,6 +2,9 @@ package com.example.playground.di.modules
 
 import com.example.playground.MainActivity
 import com.example.playground.MainActivityModule
+import com.example.playground.ui.navigation.BottomNavigationFragmentModule
+import com.example.playground.ui.login.LoginActivity
+import com.example.playground.ui.login.LoginActivityModule
 import com.example.playground.ui.posts.PostListFragmentModule
 import com.example.playground.util.diUtil.scope.ActivityScoped
 import dagger.Module
@@ -31,10 +34,22 @@ abstract class ActivityBindingModule {
      * Creates injector for PostListActivity
      */
     @ActivityScoped
-    @ContributesAndroidInjector(modules = [MainActivityModule::class
-        ,PostListFragmentModule::class])
+    @ContributesAndroidInjector(
+        modules = [MainActivityModule::class
+            , PostListFragmentModule::class
+            , BottomNavigationFragmentModule::class]
+    )
     internal abstract fun mainActivity(): MainActivity
 
+
+    /**
+     * Creates injector for LoginActivity
+     */
+    @ActivityScoped
+    @ContributesAndroidInjector(
+        modules = [LoginActivityModule::class]
+    )
+    internal abstract fun loginActivity(): LoginActivity
 
 
 }
