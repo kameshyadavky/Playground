@@ -24,6 +24,6 @@ import javax.inject.Singleton
         ActivityBindingModule::class])
 interface AppComponent : AndroidInjector<ModernApplication> {
 
-    @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<ModernApplication>()
+    @Component.Factory
+    abstract class Builder : AndroidInjector.Factory<ModernApplication>
 }

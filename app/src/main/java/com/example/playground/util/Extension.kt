@@ -25,7 +25,7 @@ import java.util.concurrent.Executor
  */
 inline fun <reified VM: ViewModel> FragmentActivity.viewModelProvider(
     provider: ViewModelProvider.Factory
-) = ViewModelProviders.of(this,provider).get(VM::class.java)
+) = ViewModelProvider(this,provider).get(VM::class.java)
 
 /**
  * For Fragments
@@ -35,7 +35,7 @@ inline fun <reified VM: ViewModel> FragmentActivity.viewModelProvider(
  */
 inline fun < reified VM : ViewModel> Fragment.viewModelProvider(
     provider : ViewModelProvider.Factory
-) = ViewModelProviders.of(this, provider).get(VM::class.java)
+) = ViewModelProvider(this, provider).get(VM::class.java)
 
 
 /**
@@ -93,9 +93,7 @@ fun ImageView.load(uri: Uri?){
                 isFirstResource: Boolean
             ): Boolean {
                 return false
-                TODO("Apply some listener " +
-                        "when image is loaded") //To change body of created functions use File | Settings | File Templates.
-            }
+                }
 
             override fun onLoadFailed(
                 e: GlideException?,
@@ -104,7 +102,6 @@ fun ImageView.load(uri: Uri?){
                 isFirstResource: Boolean
             ): Boolean {
                 return false
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
         })
@@ -113,7 +110,7 @@ fun ImageView.load(uri: Uri?){
 
 
 inline fun <reified T : ViewModel> Fragment.viewModelWithLiveData(factory: ViewModelProvider.Factory, body: T.() -> Unit): T {
-    val vm = ViewModelProviders.of(this, factory)[T::class.java]
+    val vm = ViewModelProvider(this, factory)[T::class.java]
     vm.body()
     return vm
 }
