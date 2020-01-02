@@ -1,10 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.playground">
+    package="com.example.playground">
 
-    <application android:allowBackup="true"
-                 android:label="@string/app_name"
-                 android:icon="@mipmap/ic_launcher"
-                 android:roundIcon="@mipmap/ic_launcher_round"
-                 android:supportsRtl="true"
-                 android:theme="@style/AppTheme"/>
+    <!--
+    This file describes essential information about app to the build tools,
+    the android operating system and google play
+    -->
+
+    <application
+        android:name=".PlaygroundApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- Splash activity -->
+
+        <!-- This activity will be our main activity -->
+        <activity android:name=".ui.MainActivity" />
+
+        <!--
+             This activity alias lets us change the main entry point without breaking launcher
+             shortcuts. DO NOT change its android:name attribute.
+        -->
+        <activity-alias
+            android:name=".Launcher"
+            android:label="@string/app_name"
+            android:targetActivity="com.example.playground.ui.MainActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+
+    </application>
+
 </manifest>

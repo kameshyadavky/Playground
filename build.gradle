@@ -1,14 +1,68 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.3.21'
+
+    ext {
+        kotlin_version = '1.3.21'
+        // SDK and tools
+        compileSdkVersion = 29
+        minSdkVersion = 21
+        targetSdkVersion = 29
+
+        // App dependencies
+        aiaVersion = '1.1.0'
+        archCoreTestingVersion = '2.1.0-rc01'
+        androidGradlePluginVersion = '3.5.0'
+        appcompatVersion = '1.1.0-rc01'
+        browserVersion = '1.0.0-beta01'
+        constraintLayoutVersion = '1.1.2'
+        coreVersion = '1.2.0-alpha04'
+        coroutinesVersion = '1.3.0'
+        crashlyticsVersion = '2.9.4'
+        dagger = "2.24"
+        dataBindingCompilerVersion = '3.0.1'
+        espressoVersion = '3.1.0-alpha1'
+        fabricVersion = '1.25.4'
+        firebaseAuthVersion = '16.0.4'
+        firebaseConfigVersion = '16.0.1'
+        firebaseCoreVersion = '16.0.4'
+        firebaseFirestoreVersion = '17.1.1'
+        firebaseMessagingVersion = '17.3.3'
+        firebaseUiVersion = "3.3.1"
+        flexboxVersion = "0.3.2"
+        fragmentVersion = "1.1.0-rc04"
+        glideVersion = "4.9.0"
+        googleServicesVersion = "3.2.0"
+        gsonVersion = "2.8.1"
+        hamcrestVersion = '1.3'
+        junitVersion = '4.12'
+        kotlinVersion = '1.3.41'
+        ktlintVersion = '0.33.0'
+        ktxVersion = "1.0.0"
+        legacySupportVersion = '1.0.0-alpha1'
+        lifecycleVersion = '2.2.0-alpha03'
+        materialVersion = '1.1.0-alpha09'
+        mockitoVersion = "2.8.9"
+        mockitoKotlinVersion = "1.5.0"
+        navigationVersion = "2.1.0-rc01"
+        okhttpVersion = "3.10.0"
+        okioVersion = '1.14.0'
+        roomVersion = '2.2.0-rc01'
+        rulesVersion = '1.1.1'
+        runnerVersion = '1.1.1'
+        testExtVersion = '1.1.0'
+        threetenabpVersion = "1.0.5"
+        threetenbpVersion = "1.3.6"
+        timberVersion = "4.7.1"
+        workVersion = "2.2.0"
+    }
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.android.tools.build:gradle:4.0.0-alpha07'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -19,7 +73,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
 }
 
