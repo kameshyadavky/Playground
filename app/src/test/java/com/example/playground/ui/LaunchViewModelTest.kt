@@ -3,6 +3,7 @@ package com.example.playground.ui
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.playground.util.SyncTaskExecutorRule
 import com.example.test_shared.MainCoroutineRule
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 
 /**
@@ -18,6 +19,7 @@ class LaunchViewModelTest {
     var syncTaskExecutorRule = SyncTaskExecutorRule()
 
     // Overrides Dispatchers.Main used in Coroutines
+    @ExperimentalCoroutinesApi
     @get:Rule
     var coroutineRule = MainCoroutineRule()
 
