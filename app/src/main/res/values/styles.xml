@@ -1,31 +1,3 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="Base.AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <!-- Window decor -->
-
-        <!-- Widget styles -->
-
-
-        <!-- Text appearances -->
-
-        <!-- Dialogs -->
-
-        <!-- Custom theme attrs
-             define your custom attr here to use in theme -->
-
-    </style>
-
-    <style name="AppTheme" parent="Base.AppTheme" />
-
-    <!-- This is the splash screen for app as an window background -->
-    <style name="AppTheme.Launcher">
-        <item name="android:windowBackground">@android:color/white</item>
-    </style>
-
 </resources>

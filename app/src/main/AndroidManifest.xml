@@ -20,6 +20,9 @@
 
         <!-- This activity will be our main activity -->
         <activity android:name=".ui.MainActivity" />
+        <activity
+            android:name=".ui.LauncherActivity"
+            android:theme="@style/AppTheme.Launcher" />
 
         <!--
              This activity alias lets us change the main entry point without breaking launcher
@@ -28,7 +31,7 @@
         <activity-alias
             android:name=".Launcher"
             android:label="@string/app_name"
-            android:targetActivity="com.example.playground.ui.MainActivity">
+            android:targetActivity="com.example.playground.ui.LauncherActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

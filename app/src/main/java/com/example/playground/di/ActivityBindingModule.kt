@@ -15,7 +15,11 @@
  */
 package com.example.playground.di
 
+import com.example.playground.ui.LaunchModule
+import com.example.playground.ui.LauncherActivity
+import com.example.shared.di.ActivityScoped
 import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 /**
  * We want Dagger.Android to create a Subcomponent which has a parent Component of whichever module
@@ -29,4 +33,7 @@ import dagger.Module
 @Module
 abstract class ActivityBindingModule {
 
+    @ActivityScoped
+    @ContributesAndroidInjector(modules = [LaunchModule::class])
+    internal abstract fun launcherActivity(): LauncherActivity
 }

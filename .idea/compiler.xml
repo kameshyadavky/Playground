@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="model" target="1.7" />
+      <module name="test-shared" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

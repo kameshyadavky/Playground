@@ -35,6 +35,7 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AndroidSupportInjectionModule::class,
+        ActivityBindingModule::class,
         CoroutinesModule::class,
         ViewModelModule::class,
         SharedModule::class
